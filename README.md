@@ -10,6 +10,6 @@ You'll need python 2.7 and to have a torrent client that can open magnet links.
 
 ## todo 
 
-Optimizations
-An arguments option to allow shortcutting the question prompts
-test toorgle now that the script has been deployed and see if greater consistency is achieved there
+Optimizations  
+An arguments option to allow shortcutting the question prompts  
+test toorgle now that the script has been deployed and see if greater consistency is achieved there  
