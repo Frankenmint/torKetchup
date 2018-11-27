@@ -8,12 +8,12 @@ import os
 
 def main():
     while True:
-        showString = raw_input("\nWhat Show are we catching up on starting with episode # (ex: Family Guy S04E01)\n")
+        showString = raw_input("\nWhat Show are we catching up on starting with episode # (ex: family guy S17E02)\n")
         
         if (showString == 'q'): 
            raise SystemExit
 
-        endEpisode = raw_input("Which episode until we're caught up? (ex: 14, for episode 14)\n")
+        endEpisode = raw_input("Which episode until we're caught up? (ex: 4, for episode 4)\n")
 
         # showString = "family guy S16E01"
         # endEpisode = "3"
@@ -21,7 +21,12 @@ def main():
 
         showSeason = showString.rsplit("E",1)[0]
         start = int(showString.rsplit("E",1)[1])
-        browser = webdriver.Chrome(executable_path='%s/chromedriver' % (os.getcwd()) )
+        options = webdriver.ChromeOptions()
+        options.add_argument('user-data-dir=C:\\Users\\PUTYOURWINDOWSUSERNAMEHERE\\AppData\\Local\\Google\\Chrome\\User Data') #Path to your chrome profile
+        # *NIX/OSX
+        #options.add_argument('user-data-dir=/Users/User/Library/Application Support/Google/Chrome') #Path to your chrome profile
+        options.add_argument('--no-sandbox')
+        browser = webdriver.Chrome(executable_path='%s/chromedriver.exe' % (os.getcwd()), options=options )
         for i in range (start, int(endEpisode)+1):
             lookup = showSeason+"E"+ str(i).zfill(2)
             try:
@@ -35,6 +40,8 @@ def main():
                 magnet.click() #click the magnet icon href
             except IndexError:
                 print "Unable to Find Torrent f0r %s" % (lookup)
+            if (i == int(endEpisode)+1):
+                browser.close()
 
         
 
